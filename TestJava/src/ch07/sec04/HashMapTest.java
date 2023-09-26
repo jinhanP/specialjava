@@ -14,6 +14,8 @@ public class HashMapTest {
 		hmDic.put("baby", "아기");
 		hmDic.put("love", "사랑");
 		hmDic.put("apple", "사과");
+
+		//key 객체를 중복했을때 이전의 value 객체는 삭제된다.
 		hmDic.put("apple", "사과2");
 
 		// HashMap 출력(키 객체를 ->Set으로 바꿔준다)
