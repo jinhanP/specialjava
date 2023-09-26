@@ -2,6 +2,8 @@ package ch07.sec02;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -29,8 +31,17 @@ public class ArrayListTest {
 			String data = iterator.next();
 			System.out.printf("%s ",data);
 		}
+		
+		//정렬해서 보여주기 홍 보고 길 보고 동 보고 같으면 숫자 
+		System.out.println("\n===================Sort=========================");
+		Collections.sort(strList);
+		printArrayAndList(strArray, strList);
+		
+		System.out.println("\n=================Reverse Sort=========================");
+		Collections.reverse(strList);
+		printArrayAndList(strArray, strList);
 
-		// 삽입(2번째 위치 삽입)
+		// 삽입(2번째 위치 삽입), 가져와서 출력하기
 		strArray[1] = new String("저길동");
 		strList.add(1, new String("저길동"));
 		System.out.println("\n===========================================");
