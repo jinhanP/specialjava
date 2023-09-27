@@ -30,7 +30,7 @@ public class ArrayListTest {
 		while(iterator.hasNext()) {
 			String data = iterator.next();
 			System.out.printf("%s ",data);
-		}
+		}{}
 		
 		//정렬해서 보여주기 홍 보고 길 보고 동 보고 같으면 숫자 
 		System.out.println("\n===================Sort=========================");
@@ -60,6 +60,7 @@ public class ArrayListTest {
 				break;
 			}
 		}
+		
 		System.out.printf("배열에 저길동이 %s \n", (isFind == true) ? "있어요" : "없어요");
 		System.out.printf("배열에 저길동이 위치는 %d \n", indexOf);
 		System.out.printf("List에 저길동이 %s \n", (strList.contains("저길동1") == true) ? "있어요" : "없어요");
@@ -113,7 +114,7 @@ public class ArrayListTest {
 
 	private static void printArrayAndList(String[] strArray, ArrayList<String> strList) {
 		for (int i = 0; i < strList.size(); i++) {
-			System.out.printf("strArray[%d]=ㄹ%s \t", i, strArray[i]);
+			System.out.printf("strArray[%d]=%s \t", i, strArray[i]);
 			System.out.printf(" strList[%d]=%s \n", i, strList.get(i));
 		}
 	}
