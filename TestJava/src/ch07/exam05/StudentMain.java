@@ -25,7 +25,7 @@ public class StudentMain {
 			System.out.printf("%s \n", ir.next());
 		}
 
-		System.out.println("=================정보출력================");
+		System.out.println("=================정보찾기================");
 		while (true) {
 			System.out.printf("학생이름>>");
 			String name = scan.next().trim();
@@ -37,8 +37,7 @@ public class StudentMain {
 			Student findStu = new Student(name, id);
 			boolean isFind = al.contains(findStu);// name , id 만 비교
 			if (isFind) {
-				int index = al.indexOf(findStu);
-				System.out.printf("%s \n", al.get(index));
+				System.out.printf("%s \n", al.get(al.indexOf(findStu)));
 			} else {
 				System.out.printf("찾는 학생이 없습니다.\n");
 			}
