@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class ClientEx {
 
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException { //클라이언트
 		BufferedReader in = null;
 		BufferedWriter out = null;
 		Socket socket = null;
