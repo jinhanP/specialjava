@@ -38,37 +38,37 @@ static User user; // user
 		Scanner scanner = new Scanner(System.in);
         ArrayList<Music> musicInfoList;
         System.out.println("Music Store Market");
-        try {
-        	Scanner scan = new Scanner(System.in);
-			listener = new ServerSocket(9999); // 서버 소켓 생성
-			System.out.println("연결을 기다리고 있습니다.....");
-			socket = listener.accept(); // 클라이언트로부터 연결 요청 대기
-			System.out.println("연결되었습니다.");
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-			while (true) {
-				String inputMessage = in.readLine(); // 클라이언트로부터 한 행 읽기
-				if (inputMessage.equalsIgnoreCase("bye")) {
-					System.out.println("클라이언트에서 bye로 연결을 종료하였음");
-					break; // "bye"를 받으면 연결 종료
-				}
-				System.out.println("클라이언트: " + inputMessage);
-				System.out.print("보내기>>"); // 프롬프트
-				String outputMessage = scanner.nextLine(); // 키보드에서 한 행 읽기
-				out.write(outputMessage + "\\n"); // 키보드에서 읽은 문자열 전송
-				out.flush(); // out의 스트림 버퍼에 있는 모든 문자열 전송
-			}
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		} finally {
-			try {
-				scanner.close(); // scanner 닫기
-				socket.close(); // 통신용 소켓 닫기
-				listener.close(); // 서버 소켓 닫기
-			} catch (IOException e) {
-				System.out.println("클라이언트와 채팅 중 오류가 발생했습니다.");
-			}
-		}
+//        try {
+//        	Scanner scan = new Scanner(System.in);
+//			listener = new ServerSocket(9999); // 서버 소켓 생성
+//			System.out.println("연결을 기다리고 있습니다.....");
+//			socket = listener.accept(); // 클라이언트로부터 연결 요청 대기
+//			System.out.println("연결되었습니다.");
+//			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+//			while (true) {
+//				String inputMessage = in.readLine(); // 클라이언트로부터 한 행 읽기
+//				if (inputMessage.equalsIgnoreCase("bye")) {
+//					System.out.println("클라이언트에서 bye로 연결을 종료하였음");
+//					break; // "bye"를 받으면 연결 종료
+//				}
+//				System.out.println("클라이언트: " + inputMessage);
+//				System.out.print("보내기>>"); // 프롬프트
+//				String outputMessage = scanner.nextLine(); // 키보드에서 한 행 읽기
+//				out.write(outputMessage + "\\n"); // 키보드에서 읽은 문자열 전송
+//				out.flush(); // out의 스트림 버퍼에 있는 모든 문자열 전송
+//			}
+//		} catch (IOException e) {
+//			System.out.println(e.getMessage());
+//		} finally {
+//			try {
+//				scanner.close(); // scanner 닫기
+//				socket.close(); // 통신용 소켓 닫기
+//				listener.close(); // 서버 소켓 닫기
+//			} catch (IOException e) {
+//				System.out.println("클라이언트와 채팅 중 오류가 발생했습니다.");
+//			}
+//		}
 
         System.out.println("Music Market 고객 정보 입력");
         System.out.print("당신의 이름을 입력하세요 : "); // input name
@@ -85,9 +85,9 @@ static User user; // user
         while (!quit) {
             menuIntroduction();
             try{
-                System.out.print("메뉴 번호를 선택해주세요");
+                System.out.print("메뉴 번호를 선택해주세요 :");
                 numberSelection = input.nextInt();
-                if (numberSelection < 1 || numberSelection > 9) {
+                if (numberSelection < 1 || numberSelection > 10) {
                     System.out.println("1부터 8까지의 숫자를 입력하세요.");
                 } else {
                     switch (numberSelection) {
@@ -127,8 +127,12 @@ static User user; // user
                             break;
                         case 9:
                             // check admin info
-                            menuAdminLogin();
+                            menureserve();
                             break;
+                        case 10:
+                        	// check admin info
+                        	menuAdminLogin();
+                        	break;
                     }
 
                 }
@@ -149,16 +153,18 @@ static User user; // user
 
 
 
-    // print menu info
+
+
+	// print menu info
     public static void menuIntroduction() {
         System.out.println("***************************************************");
-        System.out.println("\\t\\t\\t\\t" + "Music Play List Store");
+        System.out.println("\t\t" + "Music Play List Store");
         System.out.println("***************************************************");
-        System.out.println(" 1. 고객 정보 확인하기 \\t4. Playlist 항목 추가하기");
-        System.out.println(" 2. Playlist 상품 목록 보기\\t5. Playlist의 항목 수량 줄이기");
-        System.out.println(" 3. Playlist 비우기 \\t6. Playlist의 항목 삭제하기");
-        System.out.println(" 7. 영수증 표시하기 \\t8. 종료");
-        System.out.println(" 9. 관리자 로그인");
+        System.out.println(" 1. 고객 정보 확인하기 \t4. Playlist에 항목 추가하기");
+        System.out.println(" 2. Playlist 상품 목록 보기\t5. Playlist에 항목 수량 줄이기");
+        System.out.println(" 3. Playlist 비우기 \t6. Playlist에 항목 삭제하기");
+        System.out.println(" 7. 영수증 표시하기 \t8. 종료");
+        System.out.println(" 9. 노래 상품 예약  \t\t10. 관리자 로그인");
         System.out.println("***************************************************");
 
     }
@@ -179,7 +185,7 @@ static User user; // user
 
     public static void menuCartClear() throws CartException{
         if (Cart.cartCount == 0) {
-        //System.out.println("장바구니에 항목이 없습니다");
+        //System.out.println("Playlist에 항목이 없습니다");
             throw new CartException("Playlist에 항목이 없습니다");
         } else {
             System.out.println("Playlist에 모든 항목을 삭제하겠습니까? Y | N ");
@@ -210,7 +216,7 @@ static User user; // user
                     break;
                 }
             }
-            // 일치하면 장바구니 추가 여부를 묻는다.
+            // 일치하면 Playlist 추가 여부를 묻는다.
             if (flag) {
                 System.out.println("Playlist에 추가하겠습니까? Y | N ");
                 inputStr = input.nextLine();
@@ -313,13 +319,40 @@ static User user; // user
     public static void musicList(ArrayList<Music> music) {
         setFileToMusicList(music);
     }
-    // add book in Cart
+    // add music in Cart
     public  static  boolean isCartInMusic(String musicId){
 
         return cart.isCartInMusic(musicId);
     }
+    //print menu reserve
+    private static void menureserve() {
+    	Scanner scan = new Scanner(System.in);
+    	int num;
+        String name = null;
+        String mail = null;
+ 
+        while (true) {
+            System.out.println("노래 상품 예약하세요(1~3)");
 
-    // check admin info, add new music
+            // 없는 메뉴를 선택하면 예외 처리
+           
+            System.out.print("이메일>> ");
+            mail = scan.next();
+            System.out.print("이름>> ");
+            name = scan.next();
+            System.out.print("번호>> ");
+            num = scan.nextInt();
+            if (num > 3) { 
+               System.out.println("예약실패");
+            }else {
+            	System.out.printf(mail+"\n"+name +","+ num+ "번\t" +"예약완료");
+            }
+            System.out.println();
+            return;
+        }
+    }
+
+	// check admin info, add new music
     public  static void  menuAdminLogin(){
         System.out.println("관리자 정보를 입력하세요");
         Scanner input = new Scanner(System.in);
@@ -364,7 +397,7 @@ static User user; // user
                 try {                                                //received information in a music to save it
                     FileWriter fw = new FileWriter("music.txt", true);
                     for (int i = 0; i < 8; i++) {
-                        fw.write(writeMusic[i] + "\\n");
+                        fw.write(writeMusic[i] + "\n");
                     }
 
                     fw.close();
@@ -393,11 +426,11 @@ static User user; // user
         if(Cart.cartCount == 0){
             throw new CartException("Playlist에 항목이 없습니다");
         }else{
-            System.out.println("배송받을 분은 고객정보와 같습니까? Y | N ");
+            System.out.println("다운받을 분은 고객정보와 같습니까? Y | N ");
             Scanner input = new Scanner(System.in);
             String str = input.nextLine();
             if(str.equalsIgnoreCase("Y")){
-                System.out.println("배송지를 입력해주세요");
+                System.out.println("이메일 입력해주세요");
                 String address = input.nextLine();
                 // after input shipping date, input order info in printBill
 
@@ -406,13 +439,13 @@ static User user; // user
             }
             // input n, input new info
             else {
-                System.out.print("배송받을 고객명을 입력하세요 ");
+                System.out.print("다운받을 고객명을 입력하세요 ");
                 String name = input.nextLine();
-                System.out.print("배송받을 고객의 연락처를 입력하세요 ");
+                System.out.print("다운받을 고객의 연락처를 입력하세요 ");
                 String phone = input.nextLine();
-                System.out.print("배송받을 고객의 배송지를 입력해주세요 ");
+                System.out.print("다운받을 고객의 이메일을 입력해주세요 ");
                 String address = input.nextLine();
-// 주문 처리 후 영수증 출력 메서드 호출
+                // 주문 처리 후 영수증 출력 메서드 호출
                 printBill(name, phone, address);
             }
 
@@ -424,9 +457,9 @@ static User user; // user
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strDate = formatter.format(date);
         System.out.println();
-        System.out.println("---------------배송 받을 고객 정보----------------");
-        System.out.println("고객명 : " + name + " \\t\\t 연락처 : " + phone);
-        System.out.println("배송지 : " + address + "\\t 발송일 : " + strDate);
+        System.out.println("---------------다운 받을 고객 정보----------------");
+        System.out.println("고객명 : " + name + " \t\t 연락처 : " + phone);
+        System.out.println("이메일 : " + address + "\t 다운로드 : " + strDate);
         // print item in cart
         cart.printCart();
         // calculate item
@@ -434,12 +467,12 @@ static User user; // user
         for (int i = 0; i < Cart.cartCount; i++) {
             sum += cart.cartItem.get(i).getTotalPrice();
         }
-        System.out.println("\\t\\t\\t 주문 총금액 : " + sum + "원\\n");
+        System.out.println("\t\t\t 주문 총금액 : " + sum + "원\n");
         System.out.println("----------------------------------------------");
         System.out.println();
 
     }
-    // check number of book
+    // check number of music
 
     public static void  setFileToMusicList(ArrayList<Music> musicList){
         try {
