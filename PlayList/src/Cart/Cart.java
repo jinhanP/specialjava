@@ -66,7 +66,7 @@ public class Cart  implements CartInterface{// 장바구니 인터페이스 구�
     public void printCart() { 
         System.out.println("Paly list 상품 목록 :");
         System.out.println("---------------------------------------------");
-        System.out.println(" 노래 ID \t\t\t\t| 수량 \t| 합계");
+        System.out.println(" 노래 ID \t\t| 수량 \t| 합계");
         for( int i = 0; i < cartItem.size(); i++) {
             System.out.print(" " + cartItem.get(i).getMusicID() + " \t| ");
             System.out.print(" " + cartItem.get(i).getQuantity() + " \t| ");

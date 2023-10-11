@@ -24,10 +24,10 @@ import Member.User;
 import Musicitem.Music;
 
 public class Musicplay {
-	static Cart cart = new Cart(); 
+	static Cart cart = new Cart();
 	static User user; // user
 
-	public static void main(String[] args) throws IOException { //예외 처리
+	public static void main(String[] args) throws IOException { // 예외 처리
 		Scanner input = new Scanner(System.in);
 		String userName; // name
 		int userMobile; // phoneNum
@@ -35,13 +35,13 @@ public class Musicplay {
 		BufferedReader in = null;
 		BufferedWriter out = null;
 		Socket socket = null;
-		Scanner scan = new Scanner(System.in); //  scanner 객체 생성
+		Scanner scan = new Scanner(System.in); // scanner 객체 생성
 
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<Music> musicInfoList;
 		System.out.println("Music Store Market");
 		try {
-			socket = new Socket("172.30.1.63", 9999); // 클라이언트 소켓 생성.서버에 연결
+			socket = new Socket("192.168.219.136", 9999); // 클라이언트 소켓 생성.서버에 연결
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			while (true) {
@@ -53,7 +53,7 @@ public class Musicplay {
 					break; // 사용자가 "bye"를 입력한 경우 서버로 전송 후 실행 종료
 				}
 
-				out.write(outputMessage + "\n");//  문자열 전송
+				out.write(outputMessage + "\n");// 문자열 전송
 				out.flush();// out의 스트림 버퍼에 있는 모든 문자열 전송
 				String inputMessage = in.readLine();// 서버로부터 한 행 수신
 				System.out.println("서버:" + inputMessage);
@@ -79,8 +79,8 @@ public class Musicplay {
 
 							switch (numberSelection) {
 							case 1:
-								// user info  게스트 정보
-								menuGuestInfo(); 
+								// user info 게스트 정보
+								menuGuestInfo();
 								break;
 							case 2:
 								// view item in cartList 카트 목록에서 항목 보기
@@ -100,22 +100,18 @@ public class Musicplay {
 								menuCartRemoveItemCount();
 								break;
 							case 6:
-								// remove item in cart 장바구니 물건을 치우다
-								menuCartRemoveItem();
-								break;
-							case 7:
 								// print bill 청구서
 								menuCartBill();
 								break;
-							case 8:
+							case 7:
 								// check admin info 관리자 정보를 확인
 								menureserve();
 								break;
-							case 9:
+							case 8:
 								// Login 로그인
 								menuAdminLogin();
 								break;
-							case 10:
+							case 9:
 								// exit 나가기
 								quit = true;
 								menuExit();
@@ -127,11 +123,11 @@ public class Musicplay {
 						System.out.println(e.getMessage());
 						quit = true;
 
-					} catch (Exception e) { 
+					} catch (Exception e) {
 						System.out.println("잘못된 메뉴 선택으로 종료합니다.");
 						quit = true;
 					}
-				
+
 				}
 			}
 		} catch (UnknownHostException e) { // 알 수 없는 호스트 예외
@@ -153,10 +149,10 @@ public class Musicplay {
 		System.out.println("\t\t" + "Music Play List Store");
 		System.out.println("***************************************************");
 		System.out.println(" 1. 고객 정보 확인하기 \t4. Playlist에 항목 추가하기");
-		System.out.println(" 2. Playlist 상품 목록 보기\t5. Playlist에 항목 수량 줄이기");
-		System.out.println(" 3. Playlist 모든 항목 삭제6. Playlist에 항목 삭제하기");
-		System.out.println(" 7. 영수증 표시하기 \t9. 관리자 로그인");
-		System.out.println(" 8. 노래 상품 예약  \t10. 종료");
+		System.out.println(" 2. Playlist 상품 목록 보기\t5. Playlist에 항목 삭제");
+		System.out.println(" 3. Playlist 모든 항목 삭제\t6. 영수증 표시하기");
+		System.out.println(" 7. 노래 상품 예약 \t\t8. 관리자 로그인");
+		System.out.println(" 9. 종료");
 		System.out.println("***************************************************");
 
 	}
@@ -165,7 +161,7 @@ public class Musicplay {
 	public static void menuGuestInfo() {
 		System.out.println("현재 고객 정보  ");
 
-		System.out.println("이름 : " + user.getName() + ", 연락처 : " + user.getPhone());
+		System.out.println("이름 : " + user.getName() + " , 연락처 : " + user.getPhone());
 	}
 
 	// print Cart ItemList 항목 목록
@@ -175,7 +171,7 @@ public class Musicplay {
 		}
 	}
 
-	public static void menuCartClear() throws CartException { // 장바구니 예외 처리
+	public static void menuCartClear() throws CartException { // 장바구니 항목 삭제
 		if (Cart.cartCount == 0) {
 			throw new CartException("Playlist에 항목이 없습니다");
 		} else {
@@ -189,7 +185,7 @@ public class Musicplay {
 		}
 	}
 
-	public static void menuCartAddItem(ArrayList<Music> music) { // 배열 목록
+	public static void menuCartAddItem(ArrayList<Music> music) { // Playlist 추가
 		musicList(music);
 
 		cart.printMusicList(music);
@@ -226,6 +222,7 @@ public class Musicplay {
 		}
 
 	}
+
 	// Playlist 항목 수량 줄이기
 	public static void menuCartRemoveItemCount() throws CartException {
 		if (Cart.cartCount == 0) {
@@ -251,52 +248,19 @@ public class Musicplay {
 		if (music.getQuantity() >= 2) {
 			music.setQuantity(music.getQuantity() - 1);
 		} else {
-			System.out.println("해당 노래는 현재 1개만 있습니다. 항목을 지웁니다.");
+			System.out.println("노래 삭제완료.");
 			cart.cartItem.remove(music);
 		}
 
 	}
 
-	public static void menuCartRemoveItem() throws CartException { // 장바구니 예외 처리
-		if (Cart.cartCount == 0) {
-			throw new CartException("Playlist에 항목이 없습니다");
-		} else {
-			menuCartItemList();
-			boolean quit = false;
-			while (!quit) {
-				System.out.print("Playlist에서 삭제할 노래 ID 를 입력하세요 :");
-				Scanner input = new Scanner(System.in);
-				String str = input.nextLine();
-				boolean flag = false;
-				int numId = -1;
-				for (int i = 0; i < Cart.cartCount; i++) {
-					if (str.equals(cart.cartItem.get(i).getMusicID())) {
-						numId = i;
-						flag = true;
-						break;
-					}
-				}
-				if (flag) {
-					System.out.println("Playlist의 항목을 삭제하겠습니까? Y | N ");
-					str = input.nextLine();
-					if (str.equalsIgnoreCase("Y")) {
-						System.out.println(cart.cartItem.get(numId).getMusicID() + "노래가 Playlist에서 삭제되었습니다.");
-					}
-
-					quit = true;
-				} else {
-					System.out.println("다시 입력해 주세요");
-				}
-			}
-		}
-	}
 
 	public static void menuExit() { // 메뉴 종료
-		
-		System.out.println("10. 종료");
+
+		System.out.println("메뉴 종료");
 	}
 
-	public static void musicList(ArrayList<Music> music) { //MusicList 배열 목록
+	public static void musicList(ArrayList<Music> music) { // MusicList 배열 목록
 		setFileToMusicList(music);
 	}
 
@@ -306,7 +270,7 @@ public class Musicplay {
 		return cart.isCartInMusic(musicId);
 	}
 
-	// print menu reserve 메뉴 예약 
+	// print menu reserve 메뉴 예약
 	private static void menureserve() {
 		Scanner scan = new Scanner(System.in);
 		int num;
@@ -354,10 +318,12 @@ public class Musicplay {
 				SimpleDateFormat formatter = new SimpleDateFormat("yyMMddhhmmss"); // Today`s date 오늘날짜
 				String strDate = formatter.format(date);
 				writeMusic[0] = "music" + strDate; // info of new music 새로운 음악에 대한 정보
-				System.out.println("노래 ID : " + writeMusic[0]);
+				System.out.println("노래 ID :" + writeMusic[0]);
+				String str1 = input.nextLine();
 				System.out.print("SING : ");
 				writeMusic[1] = input.nextLine();
 				writeMusic[1] = "SING " + writeMusic[1];
+				
 				System.out.print("곡명 : ");
 				writeMusic[2] = input.nextLine();
 				System.out.print("가격(숫자) : ");
@@ -404,8 +370,8 @@ public class Musicplay {
 			if (str.equalsIgnoreCase("Y")) {
 				System.out.println("이메일 입력해주세요");
 				String address = input.nextLine();
-				// 이름,Download,email input shipping date, input order info in printBill 
-				// 이름,Download,이메일 입력후 주문정보를 인쇄 Bill에 입력합니다
+				// 이름,Download,email input shipping date, input order info in printBill
+				// 이름,Download,이메일 입력후 주문정보를 입력합니다
 
 				printBill(user.getName(), String.valueOf(user.getPhone()), address);
 			}
@@ -424,7 +390,8 @@ public class Musicplay {
 		}
 	}
 
-	// print order info(name, phone, address, shipping date) 주문정보 출력(이름, 연락처, 이메일, 다운로드)
+	// print order info(name, phone, address, shipping date) 주문정보 출력(이름, 연락처, 이메일,
+	// 다운로드)
 	public static void printBill(String name, String phone, String address) {
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");

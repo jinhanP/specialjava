@@ -9,9 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-
 public class ServerEx {
-
 
 	public static void main(String[] args) {
 		BufferedReader in = null;
