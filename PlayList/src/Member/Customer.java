@@ -1,69 +1,69 @@
 package Member;
 
-public class Customer {
+public class Customer { // 고객 클래스 생성
 
-private String name; // 고객 이름
+	private String name; // 고객 이름
 
-private int phone; // 연락처
+	private int phone; // 연락처
 
-private String address; // 주소
+	private String address; // 주소
 
-public Customer() {
+	public Customer() {
 
-}
+	}
 
-public Customer(String name, int phone) {
+	public Customer(String name, int phone) {
 
-this.name = name;
+		this.name = name;
 
-this.phone = phone;
+		this.phone = phone;
 
-}
+	}
 
-public Customer(String name, int phone, String address) {
+	public Customer(String name, int phone, String address) {
 
-this.name = name;
+		this.name = name;
 
-this.phone = phone;
+		this.phone = phone;
 
-this.address = address;
+		this.address = address;
 
-}
+	}
 
-public String getName() {
+	public String getName() {
 
-return name;
+		return name;
 
-}
+	}
 
-public void setName(String name) {
+	public void setName(String name) {
 
-this.name = name;
+		this.name = name;
 
-}
+	}
 
-public int getPhone() {
+	public int getPhone() {
 
-return phone;
+		return phone;
 
-}
+	}
 
-public void setPhone(int phone) {
+	public void setPhone(int phone) {
 
-this.phone = phone;
+		this.phone = phone;
 
-}
+	}
 
-public String getAddress() {
+	public String getAddress() {
 
-return address;
+		return address;
 
-}
+	}
 
-public void setAddress(String address) {
+	public void setAddress(String address) {
 
-this.address = address;
+		this.address = address;
 
-}
+	}
 
 }

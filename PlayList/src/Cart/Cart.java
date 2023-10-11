@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import Musicitem.Music;
 
-public class Cart  implements CartInterface{
-    public ArrayList<CartItem> cartItem = new ArrayList<CartItem>();
+public class Cart  implements CartInterface{// 장바구니 인터페이스 구현
+    public ArrayList<CartItem> cartItem = new ArrayList<CartItem>(); // 배열 목록 <카트 항목>
     public static int cartCount = 0;
 
     public Cart() {
@@ -29,8 +29,9 @@ public class Cart  implements CartInterface{
     }
     @Override
     public boolean isCartInMusic(String musicId){
-        // check overlap
+        // check overlap 겹침을 체크하다
         // if musicID in cartItemList, increase number of same music
+    	// 장바구니 항목 목록에 있는 music ID인 경우, 동일한 음악의 수를 늘립니다
         boolean flag = false;
         for(int i = 0; i < cartItem.size(); i++){
             if (musicId.equals(cartItem.get(i).getMusicID())){
@@ -62,7 +63,7 @@ public class Cart  implements CartInterface{
         cartCount = 0;
 
     }
-    public void printCart() {
+    public void printCart() { 
         System.out.println("Paly list 상품 목록 :");
         System.out.println("---------------------------------------------");
         System.out.println(" 노래 ID \t\t\t\t| 수량 \t| 합계");

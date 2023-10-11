@@ -1,10 +1,10 @@
 package Musicitem;
 
 public abstract class Item {
-    String musicId; // music ID
+    String musicId; // music ID 음악ID
     String sing; // sing
     String name; // music name
-    int unitPrice; // music price
+    int unitPrice; // music price 구성 단위
 
 
     public Item() {
@@ -16,7 +16,7 @@ public abstract class Item {
         this.name = name;
         this.unitPrice = unitPrice;
     }
-    public abstract String getMusicId();
+    public abstract String getMusicId(); // 추상으로 바꾸기
     public abstract String getSing();
     public abstract String getName();
     public abstract int getUnitPrice();

@@ -3,10 +3,10 @@ package Cart;
 import Musicitem.Music;
 
 public class CartItem {
-	private Music itemMusic; // musics info
-    private  String musicID; // music id
-    private  int quantity; // number of music
-    private  int totalPrice; // total price of books
+	private Music itemMusic; // musics info 음악 정보
+    private  String musicID; // music id 음악ID
+    private  int quantity; // number of music 곡 수
+    private  int totalPrice; // total price of musics 음원 총가격
 
     public CartItem() {
     }
