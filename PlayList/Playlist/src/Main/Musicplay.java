@@ -39,7 +39,7 @@ public class Musicplay {
 
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<Music> musicInfoList;
-		System.out.println("Music Store Market");
+		System.out.println("Music PLAY STORE 오신 걸 환영합니다.");
 		try {
 			socket = new Socket("172.30.1.63", 9999); // 클라이언트 소켓 생성.서버에 연결
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
