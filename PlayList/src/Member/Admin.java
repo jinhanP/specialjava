@@ -1,29 +1,29 @@
 package Member;
 
-public class Admin extends Customer{
+public class Admin extends Customer { // 관리자 생성
 
-private String id = "Admin";
+	private String id = "Admin";
 
-private String password = "Admin1234";
+	private String password = "Admin1234";
 
-public Admin(String name, int phone) {
+	public Admin(String name, int phone) {
 
-super(name, phone);
+		super(name, phone);
 
-}
+	}
 
-// get admin id, password
+// get admin id, password 관리자 ID, 암호
 
-public String getId() {
+	public String getId() {
 
-return id;
+		return id;
 
-}
+	}
 
-public String getPassword() {
+	public String getPassword() {
 
-return password;
+		return password;
 
-}
+	}
 
 }

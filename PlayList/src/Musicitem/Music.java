@@ -1,6 +1,6 @@
 package Musicitem;
 
-public class Music extends Item {
+public class Music extends Item { // 음악 확장 항목
     private String author;
     private String description;
     private String category;
