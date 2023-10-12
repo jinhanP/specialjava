@@ -368,33 +368,17 @@ public class Musicplay {
 			Scanner input = new Scanner(System.in);
 			String str = input.nextLine();
 			if (str.equalsIgnoreCase("Y")) {
-				System.out.print("다운받은 고객명을 입력하세요 ");
-				String name = input.nextLine();
-				System.out.print("다운받은 고객의 연락처를 입력하세요 ");
-				String phone = input.nextLine();
-				System.out.print("다운받은 고객의 이메일을 입력해주세요 ");
+				System.out.print("다운받은 고객의 이메일을 입력 : ");
 				String address = input.nextLine();
 				// 이름,Download,email input shipping date, input order info in printBill
 				// 이름,Download,이메일 입력후 주문정보를 입력합니다
 
 				printBill(user.getName(), String.valueOf(user.getPhone()), address);
 			}
-			// input n, input new info 새 정보 입력
-			else {
-				System.out.print("다운받은 고객명을 입력하세요 ");
-				String name = input.nextLine();
-				System.out.print("다운받은 고객의 연락처를 입력하세요 ");
-				String phone = input.nextLine();
-				System.out.print("다운받은 고객의 이메일을 입력해주세요 ");
-				String address = input.nextLine();
-				// 주문 처리 후 영수증 출력 메서드 호출
-				printBill(name, phone, address);
-			}
-
 		}
 	}
 
-	// print order info(name, phone, address, shipping date) 주문정보 출력(이름, 연락처, 이메일,
+	// print order info(name, phone, address, date) 주문정보 출력(이름, 연락처, 이메일,
 	// 다운로드)
 	public static void printBill(String name, String phone, String address) {
 		Date date = new Date();
