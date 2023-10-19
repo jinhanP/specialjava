@@ -1,21 +1,17 @@
 package Main;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
-
 import Cart.Cart;
 import Cart.CartItem;
 import Exceptoin.CartException;
@@ -32,33 +28,12 @@ public class Musicplay {
 		String userName; // name
 		int userMobile; // phoneNum
 		int numberSelection; // menu number
-		BufferedReader in = null;
-		BufferedWriter out = null;
-		Socket socket = null;
-		Scanner scan = new Scanner(System.in); // scanner 객체 생성
+		
 
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<Music> musicInfoList;
 		System.out.println("Music PLAY STORE 오신 걸 환영합니다.");
-		try {
-			socket = new Socket("172.30.1.63", 9999); // 클라이언트 소켓 생성.서버에 연결
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-			while (true) {
-				System.out.println("보내기>>"); // 프롬프트
-				String outputMessage = scan.nextLine(); // 키보드에서 한 행 읽기
-				if (outputMessage.equals("bye")) {
-					out.write(outputMessage + "\n"); // "bey"문자열 전송
-					out.flush();
-					break; // 사용자가 "bye"를 입력한 경우 서버로 전송 후 실행 종료
-				}
-
-				out.write(outputMessage + "\n");// 문자열 전송
-				out.flush();// out의 스트림 버퍼에 있는 모든 문자열 전송
-				String inputMessage = in.readLine();// 서버로부터 한 행 수신
-				System.out.println("서버:" + inputMessage);
-
-				System.out.println("Music Market 고객 정보 입력");
+				System.out.println("PLAY STORE 고객 정보 입력");
 				System.out.print("당신의 이름을 입력하세요 : "); // input name
 				userName = input.next();
 				System.out.print("연락처를 입력하세요 : "); // input phoneNum
@@ -66,7 +41,7 @@ public class Musicplay {
 
 				user = new User(userName, userMobile);
 
-				boolean quit = false; // loop control 그룹을 여러 번 실행
+				boolean quit = false; // 그룹을 여러 번 실행
 
 				while (!quit) {
 					menuIntroduction();
@@ -79,46 +54,46 @@ public class Musicplay {
 
 							switch (numberSelection) {
 							case 1:
-								// user info 게스트 정보
+								// 사용자 정보
 								menuGuestInfo();
 								break;
 							case 2:
-								// view item in cartList 카트 목록에서 항목 보기
+								// 장바구니 목록에서 항목 보기
 								menuCartItemList();
 								break;
 							case 3:
-								// clear cart 장바구니 지우기
+								//  장바구니 지우기
 								menuCartClear();
 								break;
 							case 4:
-								// add item in cart 장바구니 물건을 추가하다
+								//  장바구니 물건을 추가하기
 								musicInfoList = new ArrayList<>(); // music instance list
 								menuCartAddItem(musicInfoList);
 								break;
 							case 5:
-								// decrease number of item in cart 장바구니 품목 수를 줄이다
+								//  장바구니 품목 수를 줄이기
 								menuCartRemoveItemCount();
 								break;
 							case 6:
-								// print bill 청구서
+								// 영수증
 								menuCartBill();
 								break;
 							case 7:
-								// check admin info 관리자 정보를 확인
+								// 관리자 정보를 확인
 								menureserve();
 								break;
 							case 8:
-								// Login 로그인
+								// 로그인
 								menuAdminLogin();
 								break;
 							case 9:
-								// exit 나가기
+								// 나가기
 								quit = true;
 								menuExit();
 								break;
 							}
 						}
-
+					
 					} catch (CartException e) { // 장바구니 예외처리
 						System.out.println(e.getMessage());
 						quit = true;
@@ -130,18 +105,8 @@ public class Musicplay {
 
 				}
 			}
-		} catch (UnknownHostException e) { // 알 수 없는 호스트 예외
-			System.out.println(e.getMessage());
-		} finally {
-			try {
-				scan.close();
-				if (socket != null)
-					socket.close();// 클라이언트 소켓 닫기
-			} catch (IOException e) {
-				System.out.println("서버와 채팅 중 오류가 발생했습니다");
-			}
-		}
-	}
+		
+	
 
 	// print menu info 메뉴 정보 소개
 	public static void menuIntroduction() {
@@ -438,19 +403,19 @@ public class Musicplay {
 
 				readMusic[0] = musicId;
 				readMusic[1] = reader.readLine();
-				;
+				
 				readMusic[2] = reader.readLine();
-				;
+				
 				readMusic[3] = reader.readLine();
-				;
+				
 				readMusic[4] = reader.readLine();
-				;
+				
 				readMusic[5] = reader.readLine();
-				;
+				
 				readMusic[6] = reader.readLine();
-				;
+				
 				readMusic[7] = reader.readLine();
-				;
+				
 
 				Music music = new Music(readMusic[0], readMusic[1], readMusic[2], Integer.parseInt(readMusic[3]),
 						readMusic[4], readMusic[5], readMusic[6], readMusic[7]);
